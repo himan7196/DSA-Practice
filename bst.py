@@ -6,20 +6,18 @@ class Node:
         self.right = None
 
 
-def insert(root, value):
+def insert(root, data):
     if root is None:
-        return Node(value)
+        return Node(data)
+
     else:
-        if root.data == value:
-            return root
-
-        elif root.data < value:
-            root.right = insert(root.right, value)
-
-        else:
-            root.left = insert(root.left, value)
+        if data > root.data:
+            root.right = insert(root.right, data)
+        if data < root.data:
+            root.left = insert(root.left, data)
     
     return root
+
 
 def inorder(root):
     if root:
@@ -89,6 +87,21 @@ def postorder_it(root):
         print(stack_2.pop().data)
 
 
+def levelorder(root):
+    if root is None:
+        return
+    queue = []
+    queue.append(root)
+    while len(queue)!=0:
+        elem = queue.pop(0)
+        print(elem.data)
+        if elem.left is not None:
+            queue.append(elem.left)
+        if elem.right is not None:
+            queue.append(elem.right)
+        
+
+
 n = Node(10)
 insert(n, 5)
 insert(n, 15)
@@ -104,4 +117,5 @@ insert(n, 19)
 
 #inorder_it(n)
 #preorder_it(n)
-postorder_it(n)
+#postorder_it(n)
+levelorder(n)

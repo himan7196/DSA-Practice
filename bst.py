@@ -19,6 +19,7 @@ def insert(root, data):
     return root
 
 
+
 def inorder(root):
     if root:
         inorder(root.left)

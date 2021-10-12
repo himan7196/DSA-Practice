@@ -1,0 +1,42 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        num_sorted = sorted(nums)
+        lim = len(nums)
+        def binary_search(nums, find, not_at):
+            left = 0
+            right = len(nums)-1
+            while left<=right:
+                mid = int((left+right)/2)
+                print('left at', nums[left])
+                print('mid at', nums[mid])
+                print('right at', nums[right])
+                if find == nums[mid] and mid!=not_at:
+                    #print('returning :',nums[mid])
+                    return True
+                elif find<nums[mid]:
+                    right = mid-1
+                else:
+                    left = mid+1
+            print(find, 'not found')
+            return False
+                
+        vals = []
+        for i in range (lim):
+            diff = target - num_sorted[i]
+            print('Checking for ',num_sorted[i],' ',diff)
+            val = binary_search(num_sorted, diff, i)
+            if val:
+                vals.append(num_sorted[i])
+                vals.append(diff)
+                break
+        
+        print('Pair is ',vals)
+        x = nums.index(vals[0])
+        print(vals[0], ' is at ', x)
+        ind = 0
+        y = 0
+        for ind in range (lim):
+            print('checking ',nums[ind],' is not at ',x)
+            if nums[ind]==vals[1] and ind!=x:
+                y = ind
+                return [x,y]
